@@ -1,4 +1,4 @@
-import {Granularity, Instant} from './Schema'
+import { Granularity, Instant } from './Schema'
 
 interface Filter {
     count?: number,
