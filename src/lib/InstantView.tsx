@@ -1,9 +1,9 @@
-
 import React from 'react'
 import { Instant } from './Schema'
 
 interface ViewProps {
-    instants: Array<Instant>
+    instants: Array<Instant>,
+    onPlus: () => void,
 }
 
 function InstantRow(props: Instant) {
@@ -15,7 +15,8 @@ function InstantRow(props: Instant) {
 }
 
 export function InstantView(props: ViewProps) {
-    return <table>
+    return <>
+    <table>
         <tr>
             <th>ISOTime</th>
             <th>Your TimeZone</th>
@@ -23,4 +24,7 @@ export function InstantView(props: ViewProps) {
         </tr>
         {props.instants.map(e => InstantRow(e))}
     </table>
+
+        <button onClick={props.onPlus} title="Лю кета" >Лю кета!</button>
+    </>
 }

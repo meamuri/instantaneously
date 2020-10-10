@@ -1,11 +1,20 @@
-import React from 'react'
 import { InstantModel } from './InstantModel'
 import { InstantView } from './InstantView'
+import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
 
 interface ViewModelProps {
     instantModel: InstantModel,
 }
 
-export default function InstantViewModel(props: ViewModelProps) {
-    return <InstantView instants={props.instantModel.instants} />
-}
+const InstantViewModel = observer(() => {
+    let [model] = useState(() => new InstantModel())
+    return InstantView({
+        onPlus: () => {
+            model.incCount()
+        },
+        instants: model.instants,
+    })
+})
+
+export default InstantViewModel
