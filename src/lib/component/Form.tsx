@@ -19,7 +19,8 @@ export default function Form(props: Props) {
                 </p>
 
                 <p>
-                {/* datepicker here */ }
+                    <button onClick={() => props.onDateChange(new Date(2020, 8, 20))} >Down</button>
+                    <label>Количество</label>
                 </p>
             </fieldset>
         </form>

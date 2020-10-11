@@ -2,9 +2,9 @@ import { Granularity, Instant } from './Schema'
 import { makeAutoObservable } from 'mobx'
 
 interface Filter {
-    count: number,
+    count?: number,
     initial?: Date,
-    granularity: GranularityFilter,
+    granularity?: GranularityFilter,
 }
 
 interface GranularityFilter {
@@ -12,37 +12,42 @@ interface GranularityFilter {
     value: number,
 }
 
-export function instants({count = 15, initial = new Date(), granularity }: Filter) {
-    let divider = granularity.type * granularity.value
-
-    let timestamp = initial.getTime()
-    let instant = new Date( timestamp - (timestamp % divider));
-
-    let forRender: Array<Instant> = []
-    for (let i = 0; i < count; i++) {
-        let info: Instant = {
-            ISOTime: instant?.toISOString(),
-            LocalTime: instant?.toLocaleString(),
-            Unix: instant.getTime(),
-        }
-        forRender.push(info)
-        instant = new Date(info.Unix - divider)
-    }
-    return forRender
-}
-
 export class InstantModel {
-    instants: Array<Instant>
+    get instants(): Array<Instant> {
+        let instant = this.instant
 
+        let forRender: Array<Instant> = []
+        for (let i = 0; i < this._count; i++) {
+            let info: Instant = {
+                ISOTime: instant?.toISOString(),
+                LocalTime: instant?.toLocaleString(),
+                Unix: instant.getTime(),
+            }
+            forRender.push(info)
+            instant = new Date(info.Unix - this.divider)
+        }
+        return forRender
+    }
+
+    private _granularity: GranularityFilter
     private _count: number
     private _date: Date
+
+    get granularity(): GranularityFilter {
+        return this._granularity
+    }
+
+    get instant(): Date {
+        console.log(this._date.toISOString())
+        let timestamp = this._date.getTime()
+        return new Date( timestamp - (timestamp % this.divider))
+    }
 
     get date() {
         return this._date
     }
     set date(newValue) {
         this._date = newValue
-        this.reconfigureInstants()
     }
 
     get count() {
@@ -50,25 +55,20 @@ export class InstantModel {
     }
     set count(newValue) {
         this._count = newValue
-        this.reconfigureInstants()
     }
 
-    constructor(count: number = 15) {
+    private get divider(): number {
+        return this.granularity.type * this.granularity.value
+    }
+
+    constructor({count = 15,
+                    initial = new Date(),
+                    granularity = { type : Granularity.MINUTES, value: 60}
+    }: Filter) {
         this._count = count
-        this._date = new Date()
-        this.instants = []
-        this.reconfigureInstants()
+        this._date = initial
+        this._granularity = granularity
         makeAutoObservable(this)
     }
 
-    private reconfigureInstants() {
-        this.instants = instants({
-            count: this._count,
-            initial: this._date,
-            granularity: {
-                type: Granularity.HOURS,
-                value: 1,
-            },
-        })
-    }
 }

@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
 const InstantViewModel = observer(() => {
-    let [model] = useState(() => new InstantModel())
+    let [model] = useState(() => new InstantModel({}))
 
     return InstantView({
         onPlus: (e) => {
