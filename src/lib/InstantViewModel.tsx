@@ -11,6 +11,9 @@ const InstantViewModel = observer(() => {
             let newCount = e.target.value
             model.count = Number(newCount)
         },
+        onDateChange: (e) => {
+            model.date = e
+        },
         instants: model.instants,
     })
 })

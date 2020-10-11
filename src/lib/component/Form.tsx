@@ -5,6 +5,7 @@ type Props = {
         min: number, max: number, value: number,
     },
     onPlus: ((e: ChangeEvent<HTMLInputElement>) => void),
+    onDateChange: ((e: Date) => void),
 }
 
 export default function Form(props: Props) {
@@ -15,6 +16,10 @@ export default function Form(props: Props) {
                 <p>
                     <input onChange={props.onPlus} type="range" {...props.rangeSettings} />
                     <label>Количество</label>
+                </p>
+
+                <p>
+                {/* datepicker here */ }
                 </p>
             </fieldset>
         </form>

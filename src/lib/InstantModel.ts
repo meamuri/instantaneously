@@ -12,7 +12,7 @@ interface GranularityFilter {
     value: number,
 }
 
-export function instants({count, initial = new Date(), granularity }: Filter) {
+export function instants({count = 15, initial = new Date(), granularity }: Filter) {
     let divider = granularity.type * granularity.value
 
     let timestamp = initial.getTime()
@@ -35,30 +35,40 @@ export class InstantModel {
     instants: Array<Instant>
 
     private _count: number
+    private _date: Date
+
+    get date() {
+        return this._date
+    }
+    set date(newValue) {
+        this._date = newValue
+        this.reconfigureInstants()
+    }
 
     get count() {
         return this._count
     }
     set count(newValue) {
         this._count = newValue
-        this.instants = instants({
-            count: this._count,
-            granularity: {
-                type: Granularity.HOURS,
-                value: 1,
-            },
-        })
+        this.reconfigureInstants()
     }
 
     constructor(count: number = 15) {
         this._count = count
+        this._date = new Date()
+        this.instants = []
+        this.reconfigureInstants()
+        makeAutoObservable(this)
+    }
+
+    private reconfigureInstants() {
         this.instants = instants({
             count: this._count,
+            initial: this._date,
             granularity: {
                 type: Granularity.HOURS,
                 value: 1,
             },
         })
-        makeAutoObservable(this)
     }
 }

@@ -7,6 +7,7 @@ import Form from './Form'
 interface ViewProps {
     instants: Array<Instant>,
     onPlus: (e: ChangeEvent<HTMLInputElement>) => void,
+    onDateChange: (e: Date) => void,
 }
 
 export function InstantView(props: ViewProps) {
