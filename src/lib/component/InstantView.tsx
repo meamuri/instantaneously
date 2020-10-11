@@ -10,13 +10,16 @@ interface ViewProps {
 }
 
 export function InstantView(props: ViewProps) {
+    let rangeSettings = {
+        min: 5, max: 30, value: props.instants.length,
+    }
     return (
         <div className="row">
             <div className="column">
                 {Table(props)}
             </div>
             <div className="column">
-                {Form({ ...props })}
+                {Form({ ...props, rangeSettings })}
             </div>
     </div>)
 }

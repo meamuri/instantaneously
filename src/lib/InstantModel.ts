@@ -2,7 +2,7 @@ import { Granularity, Instant } from './Schema'
 import { makeAutoObservable } from 'mobx'
 
 interface Filter {
-    count?: number,
+    count: number,
     initial?: Date,
     granularity: GranularityFilter,
 }
@@ -12,8 +12,12 @@ interface GranularityFilter {
     value: number,
 }
 
-export function instants({count = 30, initial = new Date(), granularity }: Filter) {
-    let instant = initial;
+export function instants({count, initial = new Date(), granularity }: Filter) {
+    let divider = granularity.type * granularity.value
+
+    let timestamp = initial.getTime()
+    let instant = new Date( timestamp - (timestamp % divider));
+
     let forRender: Array<Instant> = []
     for (let i = 0; i < count; i++) {
         let info: Instant = {
@@ -22,7 +26,7 @@ export function instants({count = 30, initial = new Date(), granularity }: Filte
             Unix: instant.getTime(),
         }
         forRender.push(info)
-        instant = new Date(info.Unix - granularity.value * granularity.type)
+        instant = new Date(info.Unix - divider)
     }
     return forRender
 }
@@ -46,7 +50,7 @@ export class InstantModel {
         })
     }
 
-    constructor(count: number = 30) {
+    constructor(count: number = 15) {
         this._count = count
         this.instants = instants({
             count: this._count,
