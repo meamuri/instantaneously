@@ -1,5 +1,5 @@
 import { InstantModel } from './InstantModel'
-import { InstantView } from './InstantView'
+import InstantView from './component'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
 
