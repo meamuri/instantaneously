@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react'
 import { Instant } from '../Schema'
 import './InstantView.css'
 import { Table } from './Table'
-import Form from "./Form";
+import Form from './Form'
 
 interface ViewProps {
     instants: Array<Instant>,
