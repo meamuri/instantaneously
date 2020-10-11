@@ -32,8 +32,11 @@ export class InstantModel {
 
     private _count: number
 
-    incCount() {
-        this._count = this._count + 1
+    get count() {
+        return this._count
+    }
+    set count(newValue) {
+        this._count = newValue
         this.instants = instants({
             count: this._count,
             granularity: {
@@ -44,7 +47,6 @@ export class InstantModel {
     }
 
     constructor(count: number = 30) {
-        makeAutoObservable(this)
         this._count = count
         this.instants = instants({
             count: this._count,
@@ -53,5 +55,6 @@ export class InstantModel {
                 value: 1,
             },
         })
+        makeAutoObservable(this)
     }
 }

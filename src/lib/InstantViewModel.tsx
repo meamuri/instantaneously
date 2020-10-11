@@ -8,8 +8,8 @@ const InstantViewModel = observer(() => {
 
     return InstantView({
         onPlus: (e) => {
-            console.log(JSON.stringify(e.target.value))
-            model.incCount()
+            let newCount = e.target.value
+            model.count = Number(newCount)
         },
         instants: model.instants,
     })

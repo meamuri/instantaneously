@@ -32,7 +32,7 @@ export function InstantView(props: ViewProps) {
         <fieldset>
             <legend>Configure instantaneously(-fy)</legend>
             <p>
-                <input onChange={props.onPlus} type="range" />
+                <input onChange={props.onPlus} type="range" min={5} max={30} />
                 <label>Количество</label>
             </p>
         </fieldset>
