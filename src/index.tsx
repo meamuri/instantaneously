@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
-import InstantViewModel from './lib/InstantViewModel'
+import InstantViewModel from './lib'
 
 ReactDOM.render(
   <React.StrictMode>

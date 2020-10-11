@@ -25,6 +25,6 @@ export function InstantView(props: ViewProps) {
         {props.instants.map(e => InstantRow(e))}
     </table>
 
-        <button onClick={props.onPlus} title="Лю кета" >Лю кета!</button>
+        <button onClick={props.onPlus}>Add instant</button>
     </>
 }
