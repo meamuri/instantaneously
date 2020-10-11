@@ -7,7 +7,8 @@ const InstantViewModel = observer(() => {
     let [model] = useState(() => new InstantModel())
 
     return InstantView({
-        onPlus: () => {
+        onPlus: (e) => {
+            console.log(JSON.stringify(e.target.value))
             model.incCount()
         },
         instants: model.instants,
