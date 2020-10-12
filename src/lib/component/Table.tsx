@@ -3,8 +3,8 @@ import { Instant } from '../Schema'
 
 function InstantRow(props: Instant) {
     return <tr key={props.Unix}>
+        <td>{props.LocalTime}</td>
         <td>{props.ISOTime}</td>
-        <td>{props.Unix}</td>
         <td>{props.Unix}</td>
     </tr>
 }
@@ -18,8 +18,8 @@ export function Table(props: Props) {
     return (<table>
         <thead>
         <tr>
-            <th>ISOTime</th>
             <th>Your TimeZone</th>
+            <th>ISOTime</th>
             <th>Unix</th>
         </tr>
         </thead>

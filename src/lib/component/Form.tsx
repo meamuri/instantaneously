@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react'
+import DatePicker from 'react-date-picker'
 
 type Props = {
     rangeSettings: {
@@ -20,11 +21,10 @@ export default function Form(props: Props) {
                 </p>
 
                 <p>
-                    <button onClick={(e) => {
-                        e.preventDefault()
-                        let changedTimestamp = props.date.getTime() - 86400 * 1000
-                        return props.onDateChange(new Date(changedTimestamp))
-                    }} >Down</button>
+                    <DatePicker value={props.date} onChange={(e) => {
+                        let k: Date[] = []
+                        return props.onDateChange(k.concat(e)[0])
+                    }} />
                     <label>Количество</label>
                 </p>
             </fieldset>

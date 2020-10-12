@@ -13,6 +13,7 @@
     "mobx": "^6.0.1",
     "mobx-react-lite": "^3.0.0",
     "react": "^16.13.1",
+    "react-date-picker": "^8.0.3",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.3",
     "typescript": "~3.7.2"
