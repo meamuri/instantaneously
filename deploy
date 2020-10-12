@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+yarn build
+source .env.local && aws --profile ${AWS_PROFILE} s3 sync build/ s3://${BUCKET_NAME} --delete
