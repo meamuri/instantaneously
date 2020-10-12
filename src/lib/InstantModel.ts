@@ -2,9 +2,9 @@ import { Granularity, Instant } from './Schema'
 import { makeAutoObservable } from 'mobx'
 
 interface Filter {
-    count: number,
+    count?: number,
     initial?: Date,
-    granularity: GranularityFilter,
+    granularity?: GranularityFilter,
 }
 
 interface GranularityFilter {
@@ -12,53 +12,56 @@ interface GranularityFilter {
     value: number,
 }
 
-export function instants({count, initial = new Date(), granularity }: Filter) {
-    let divider = granularity.type * granularity.value
-
-    let timestamp = initial.getTime()
-    let instant = new Date( timestamp - (timestamp % divider));
-
-    let forRender: Array<Instant> = []
-    for (let i = 0; i < count; i++) {
-        let info: Instant = {
-            ISOTime: instant?.toISOString(),
-            LocalTime: instant?.toLocaleString(),
-            Unix: instant.getTime(),
-        }
-        forRender.push(info)
-        instant = new Date(info.Unix - divider)
-    }
-    return forRender
-}
-
 export class InstantModel {
-    instants: Array<Instant>
+    get instants(): Array<Instant> {
+        let instant = this.instant
 
-    private _count: number
-
-    get count() {
-        return this._count
-    }
-    set count(newValue) {
-        this._count = newValue
-        this.instants = instants({
-            count: this._count,
-            granularity: {
-                type: Granularity.HOURS,
-                value: 1,
-            },
-        })
+        let forRender: Array<Instant> = []
+        for (let i = 0; i < this.count; i++) {
+            let info: Instant = {
+                ISOTime: instant?.toISOString(),
+                LocalTime: instant?.toLocaleString(),
+                Unix: instant.getTime(),
+            }
+            forRender.push(info)
+            instant = new Date(info.Unix - this.divider)
+        }
+        return forRender
     }
 
-    constructor(count: number = 15) {
-        this._count = count
-        this.instants = instants({
-            count: this._count,
-            granularity: {
-                type: Granularity.HOURS,
-                value: 1,
-            },
-        })
+    private _granularity: GranularityFilter
+    count: number
+    private _date: Date
+
+    get granularity(): GranularityFilter {
+        return this._granularity
+    }
+
+    get instant(): Date {
+        console.log(this._date.toISOString())
+        let timestamp = this._date.getTime()
+        return new Date( timestamp - (timestamp % this.divider))
+    }
+
+    get date() {
+        return this._date
+    }
+    set date(newValue) {
+        this._date = newValue
+    }
+
+    private get divider(): number {
+        return this.granularity.type * this.granularity.value
+    }
+
+    constructor({count = 15,
+                    initial = new Date(),
+                    granularity = { type : Granularity.MINUTES, value: 60}
+    }: Filter) {
+        this.count = count
+        this._date = initial
+        this._granularity = granularity
         makeAutoObservable(this)
     }
+
 }
