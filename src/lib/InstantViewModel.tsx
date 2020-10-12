@@ -9,7 +9,7 @@ const InstantViewModel = observer(() => {
     return InstantView({
         onPlus: (e) => {
             let newCount = e.target.value
-            model.count = Number(newCount)
+            model.setCount(Number(newCount))
         },
         onDateChange: (e) => {
             model.date = e

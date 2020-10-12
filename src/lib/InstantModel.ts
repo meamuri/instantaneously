@@ -1,5 +1,5 @@
 import { Granularity, Instant } from './Schema'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, action } from 'mobx'
 
 interface Filter {
     count?: number,
@@ -30,8 +30,13 @@ export class InstantModel {
     }
 
     private _granularity: GranularityFilter
-    count: number
+    private _count: number
+    get count(): number { return this._count }
     private _date: Date
+
+    setCount(newValue: number) {
+        this._count = newValue
+    }
 
     get granularity(): GranularityFilter {
         return this._granularity
@@ -57,10 +62,12 @@ export class InstantModel {
                     initial = new Date(),
                     granularity = { type : Granularity.MINUTES, value: 60}
     }: Filter) {
-        this.count = count
+        this._count = count
         this._date = initial
         this._granularity = granularity
-        makeAutoObservable(this)
+        makeAutoObservable(this, {
+            setCount: action,
+        })
     }
 
 }
