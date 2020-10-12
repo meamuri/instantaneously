@@ -8,6 +8,7 @@ interface ViewProps {
     instants: Array<Instant>,
     onPlus: (e: ChangeEvent<HTMLInputElement>) => void,
     onDateChange: (e: Date) => void,
+    date: Date,
 }
 
 export function InstantView(props: ViewProps) {

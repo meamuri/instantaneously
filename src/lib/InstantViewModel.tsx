@@ -15,6 +15,7 @@ const InstantViewModel = observer(() => {
             model.date = e
         },
         instants: model.instants,
+        date: model.date,
     })
 })
 

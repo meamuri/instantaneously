@@ -17,7 +17,7 @@ export class InstantModel {
         let instant = this.instant
 
         let forRender: Array<Instant> = []
-        for (let i = 0; i < this._count; i++) {
+        for (let i = 0; i < this.count; i++) {
             let info: Instant = {
                 ISOTime: instant?.toISOString(),
                 LocalTime: instant?.toLocaleString(),
@@ -30,7 +30,7 @@ export class InstantModel {
     }
 
     private _granularity: GranularityFilter
-    private _count: number
+    count: number
     private _date: Date
 
     get granularity(): GranularityFilter {
@@ -50,13 +50,6 @@ export class InstantModel {
         this._date = newValue
     }
 
-    get count() {
-        return this._count
-    }
-    set count(newValue) {
-        this._count = newValue
-    }
-
     private get divider(): number {
         return this.granularity.type * this.granularity.value
     }
@@ -65,7 +58,7 @@ export class InstantModel {
                     initial = new Date(),
                     granularity = { type : Granularity.MINUTES, value: 60}
     }: Filter) {
-        this._count = count
+        this.count = count
         this._date = initial
         this._granularity = granularity
         makeAutoObservable(this)

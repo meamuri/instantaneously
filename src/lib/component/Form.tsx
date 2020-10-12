@@ -6,6 +6,7 @@ type Props = {
     },
     onPlus: ((e: ChangeEvent<HTMLInputElement>) => void),
     onDateChange: ((e: Date) => void),
+    date: Date,
 }
 
 export default function Form(props: Props) {
@@ -19,7 +20,11 @@ export default function Form(props: Props) {
                 </p>
 
                 <p>
-                    <button onClick={() => props.onDateChange(new Date(2020, 8, 20))} >Down</button>
+                    <button onClick={(e) => {
+                        e.preventDefault()
+                        let changedTimestamp = props.date.getTime() - 86400 * 1000
+                        return props.onDateChange(new Date(changedTimestamp))
+                    }} >Down</button>
                     <label>Количество</label>
                 </p>
             </fieldset>
