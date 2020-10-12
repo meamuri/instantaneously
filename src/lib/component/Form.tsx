@@ -20,13 +20,12 @@ export default function Form(props: Props) {
                     <label>Количество</label>
                 </p>
 
-                <p>
-                    <DatePicker value={props.date} onChange={(e) => {
-                        let k: Date[] = []
-                        return props.onDateChange(k.concat(e)[0])
-                    }} />
-                    <label>Количество</label>
-                </p>
+                <DatePicker value={props.date} onChange={(e) => {
+                    let k: Date[] = []
+                    console.log(e)
+                    return props.onDateChange(k.concat(e)[0] || new Date())
+                }} />
+                <label>Количество</label>
             </fieldset>
         </form>
     )

@@ -38,7 +38,6 @@ export class InstantModel {
     }
 
     get instant(): Date {
-        console.log(this._date.toISOString())
         let timestamp = this._date.getTime()
         return new Date( timestamp - (timestamp % this.divider))
     }
