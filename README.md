@@ -1,10 +1,11 @@
 ## Next actions
 
 * Try to move model outside of ViewModel
-* Remove `<App /> component: render ViewModel directly
+* Remove `<App />` component: render ViewModel directly
 * Optimize, remove unused
 * CSS
 * Testing
+* Provide a version to footer (with commit hash). Provide a link to the repository page.
 
 ## Available Scripts
 
