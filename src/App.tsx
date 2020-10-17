@@ -3,7 +3,10 @@ import './App.css'
 import InstantViewModel from './lib/InstantViewModel'
 
 function App() {
-    return <InstantViewModel/>
+    return (<>
+        <div className="header">Header</div>
+        <InstantViewModel/>
+    </>)
 }
 
 export default App;
