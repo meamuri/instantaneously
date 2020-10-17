@@ -3,6 +3,7 @@ import { Instant } from '../Schema'
 import './InstantView.css'
 import { Table } from './Table'
 import Form from './Form'
+import { Footer } from './Footer'
 
 interface ViewProps {
     instants: Array<Instant>,
@@ -22,6 +23,7 @@ export function InstantView(props: ViewProps) {
             </div>
             <div className="column">
                 {Form({ ...props, rangeSettings })}
+                <Footer />
             </div>
     </div>)
 }
