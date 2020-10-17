@@ -1,5 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { Instant } from '../Schema'
+import './Table.css'
 
 function InstantRow(props: Instant) {
     return <tr key={props.Unix}>
