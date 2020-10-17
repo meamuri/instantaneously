@@ -7,7 +7,15 @@
 * Testing
 * Provide a version to footer (with commit hash). Provide a link to the repository page.
 
-## Available Scripts
+## Additional way to run static
+
+```
+yarn global add serve
+yarn build
+serve -s build
+```
+
+## Available Scripts (react ideas)
 
 In the project directory, you can run:
 
