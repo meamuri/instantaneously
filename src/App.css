@@ -1,5 +1,13 @@
 .header {
+  margin-left: 20px;
+  margin-right: 20px;
   height: 60px;
-  background-color: coral;
-  width: 100%;
+  background-color: cornflowerblue;
+  color: white;
+}
+
+.header > h3 {
+  padding-left: 9px;
+  padding-top: 9px;
+  margin-top: 0;
 }

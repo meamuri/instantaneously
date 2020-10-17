@@ -4,7 +4,7 @@ import InstantViewModel from './lib/InstantViewModel'
 
 function App() {
     return (<>
-        <div className="header">Header</div>
+        <div className="header"><h3>Instantaneously(-fy) App</h3></div>
         <InstantViewModel/>
     </>)
 }
