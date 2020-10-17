@@ -16,16 +16,34 @@ export default function Form(props: Props) {
             <fieldset>
                 <legend>Configure instantaneously(-fy)</legend>
                 <p>
+                    <label>Count: </label>
                     <input onChange={props.onPlus} type="range" {...props.rangeSettings} />
-                    <label>Количество</label>
                 </p>
 
+                <p>
+                <label>Date: </label>
                 <DatePicker value={props.date} onChange={(e) => {
                     let k: Date[] = []
                     console.log(e)
                     return props.onDateChange(k.concat(e)[0] || new Date())
                 }} />
-                <label>Количество</label>
+                </p>
+
+                <p>
+                <label>Granularity: </label>
+                <div>
+                    <label>
+                    <input type="radio" value={5}/>
+                    5 minutes
+                    </label><label>
+                    <input type="radio" value={1}/>
+                    1 hour
+                    </label><label>
+                    <input type="radio" value={24}/>
+                    24 hours
+                    </label>
+                </div>
+                </p>
             </fieldset>
         </form>
     )
