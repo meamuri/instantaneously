@@ -13,7 +13,6 @@ type Props = {
 }
 
 export default function Form(props: Props) {
-    console.log(props.granularity)
     let [granularity, setGranularity] = useState(props.granularity)
 
     useEffect(() => {
@@ -30,9 +29,9 @@ export default function Form(props: Props) {
 
                 <label>Date: </label>
                 <DatePicker value={props.date} onChange={(e) => {
-                    let k: Date[] = []
-                    console.log(e)
-                    return props.onDateChange(k.concat(e)[0] || new Date())
+                    const k: Date[] = []
+                    const d = k.concat(e)[0] || new Date()
+                    return props.onDateChange(d)
                 }} />
 
                 <p>
