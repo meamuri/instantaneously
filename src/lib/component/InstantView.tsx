@@ -4,12 +4,15 @@ import './InstantView.css'
 import { Table } from './Table'
 import Form from './Form'
 import { Footer } from './Footer'
+import { UIGranularity } from './schema'
 
 interface ViewProps {
     instants: Array<Instant>,
     onPlus: (e: ChangeEvent<HTMLInputElement>) => void,
     onDateChange: (e: Date) => void,
     date: Date,
+    granularity?: UIGranularity,
+    onGranularityChanged: (e: string) => void,
 }
 
 export function InstantView(props: ViewProps) {

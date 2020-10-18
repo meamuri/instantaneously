@@ -7,7 +7,7 @@ interface Filter {
     granularity?: GranularityFilter,
 }
 
-interface GranularityFilter {
+export interface GranularityFilter {
     type: Granularity,
     value: number,
 }
@@ -30,28 +30,20 @@ export class InstantModel {
     }
 
     private _granularity: GranularityFilter
+    get granularity(): GranularityFilter { return this._granularity }
+    setGranularity(g: GranularityFilter) { this._granularity = g }
+
     private _count: number
     get count(): number { return this._count }
+    setCount(newValue: number) { this._count = newValue }
+
     private _date: Date
-
-    setCount(newValue: number) {
-        this._count = newValue
-    }
-
-    get granularity(): GranularityFilter {
-        return this._granularity
-    }
+    get date() { return this._date }
+    setDate(newValue: Date) { this._date = newValue }
 
     get instant(): Date {
         let timestamp = this._date.getTime()
         return new Date( timestamp - (timestamp % this.divider))
-    }
-
-    get date() {
-        return this._date
-    }
-    set date(newValue) {
-        this._date = newValue
     }
 
     private get divider(): number {
@@ -60,14 +52,15 @@ export class InstantModel {
 
     constructor({count = 15,
                     initial = new Date(),
-                    granularity = { type : Granularity.MINUTES, value: 60}
+                    granularity = { type : Granularity.HOURS, value: 1}
     }: Filter) {
         this._count = count
         this._date = initial
         this._granularity = granularity
         makeAutoObservable(this, {
+            setDate: action,
             setCount: action,
+            setGranularity: action,
         })
     }
-
 }
