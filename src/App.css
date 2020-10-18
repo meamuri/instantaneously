@@ -11,3 +11,50 @@
   padding-top: 9px;
   margin-top: 0;
 }
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+div.row {
+  margin: 20px;
+}
+
+.column-9 {
+  flex: 90%;
+}
+
+.column-8 {
+  flex: 80%;
+}
+
+.column-7 {
+  flex: 70%;
+}
+
+.column-6 {
+  flex: 60%;
+}
+
+.column-5 {
+  flex: 50%;
+}
+
+.column-4 {
+  flex: 40%;
+}
+
+.column-3 {
+  flex: 30%;
+}
+
+.column-2 {
+  flex: 20%;
+}
+.column-1 {
+  flex: 10%;
+}

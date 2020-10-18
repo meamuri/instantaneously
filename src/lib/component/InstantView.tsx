@@ -21,10 +21,10 @@ export function InstantView(props: ViewProps) {
     }
     return (
         <div className="row">
-            <div className="column">
+            <div className="column-6">
                 {Table(props)}
             </div>
-            <div className="column">
+            <div className="column-4">
                 {Form({ ...props, rangeSettings })}
                 <Footer />
             </div>
