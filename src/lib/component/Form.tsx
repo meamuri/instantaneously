@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useState, useEffect } from 'react'
+import React, {ChangeEvent,} from 'react'
 import DatePicker from 'react-date-picker'
+import { UIGranularity, toLabel } from './schema'
 
 type Props = {
     rangeSettings: {
@@ -13,11 +14,17 @@ type Props = {
 }
 
 export default function Form(props: Props) {
-    let [granularity, setGranularity] = useState(props.granularity)
+    const { granularity } = props
+    const radios = [UIGranularity.MINUTES_5, UIGranularity.HOURS_1, UIGranularity.HOURS_24].map(g =>
+        <label key={g}>
+            <input type="radio"
+                   onChange={e => props.onGranularityChanged(e.currentTarget.value)}
+                   checked={granularity === g}
+                   value={g}/>
+            {toLabel(g)}
+        </label>
+    )
 
-    useEffect(() => {
-        props.onGranularityChanged(granularity || "1h")
-    }, [granularity])
     return (
         <form>
             <fieldset>
@@ -35,17 +42,8 @@ export default function Form(props: Props) {
                 }} />
 
                 <p>
-                <label>Granularity: </label>
-                    <label>
-                    <input type="radio" onChange={e => setGranularity(e.currentTarget.value)} checked={granularity === "5m"} value="5m"/>
-                    5 minutes
-                    </label><label>
-                    <input type="radio" onChange={e => setGranularity(e.currentTarget.value)} checked={granularity === "1h"} value="1h"/>
-                    1 hour
-                    </label><label>
-                    <input type="radio" onChange={e => setGranularity(e.currentTarget.value)} checked={granularity === "24h"} value="24h"/>
-                    24 hours
-                    </label>
+                    <label>Granularity: </label>
+                    {radios}
                 </p>
             </fieldset>
         </form>
